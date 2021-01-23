@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 
 import com.app.samples.springboot.util.ProductUtil;
 import com.app.samples.springboot.entity.Product;
+import com.app.samples.springboot.entity.ProductLocation;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -36,7 +37,7 @@ public class ProductDAO {
 	@Autowired
 	private ProductUtil productUtil; 
 	
-	public Product updateProduct(Product product) {
+	public Product updateProduct(Product product, long productId) {
 		String METHOD_NAME = "updateProduct";
 		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
 		SimpleJdbcCall simpleJdbcCall = null;
@@ -51,8 +52,8 @@ public class ProductDAO {
 				jsonProduct = productUtil.convertObjectToJson(product);
 				logger.info("v_product : " + jsonProduct);
 				inParamMap.put("v_product", jsonProduct);//product json object
-				logger.info("v_product_id : " + product.getProductId());
-				inParamMap.put("v_product_id", product.getProductId()); //product id
+				logger.info("v_product_id : " + productId);
+				inParamMap.put("v_product_id", productId); //product id
 			}
 			sqlParameterSource = new MapSqlParameterSource(inParamMap);
 			simpleJdbcCallResult = simpleJdbcCall.execute(sqlParameterSource);
@@ -61,5 +62,32 @@ public class ProductDAO {
 			dataAccessException.printStackTrace();
 		}
 		return product;
+	}
+	
+	public ProductLocation updateProductLocation(ProductLocation productLocation, long productId) {
+		String METHOD_NAME = "updateProductLocation";
+		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
+		Map<String, Object> inParamMap = null;
+		SqlParameterSource sqlParameterSource = null;
+		Map<String, Object> simpleJdbcCallResult = null;
+		SimpleJdbcCall simpleJdbcCall = null;
+		String jsonProductLocation = null;
+		try {
+			inParamMap = new HashMap<String, Object>();
+			simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("updateproduct_location");
+			if(productLocation != null) {
+				jsonProductLocation = productUtil.convertObjectToJson(productLocation);
+				logger.info("v_product_location : " + jsonProductLocation);
+				inParamMap.put("v_product_location", jsonProductLocation);//productlocation json object
+				logger.info("v_product_id : " + productId);
+				inParamMap.put("v_product_id", productId); //product id
+			}
+			sqlParameterSource = new MapSqlParameterSource(inParamMap);
+			simpleJdbcCallResult = simpleJdbcCall.execute(sqlParameterSource);
+		}
+		catch(DataAccessException dataAccessException) {
+			dataAccessException.printStackTrace();
+		}
+		return productLocation;
 	}
 }
