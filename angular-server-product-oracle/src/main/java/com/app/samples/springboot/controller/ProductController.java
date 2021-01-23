@@ -1,6 +1,7 @@
 package com.app.samples.springboot.controller;
 
 import java.util.logging.Logger;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessResourceFailureException;
@@ -19,6 +20,8 @@ import com.app.samples.springboot.repository.ProductRepository;
 import com.app.samples.springboot.repository.ProductDAO;
 import com.app.samples.springboot.util.ProductUtil;
 import com.app.samples.springboot.entity.Product;
+import com.app.samples.springboot.exception.ResourceNotFoundException;
+
 
 // TODO: Auto-generated Javadoc
 /**
@@ -67,6 +70,20 @@ public class ProductController {
 			} else {
 				throw new DataAccessResourceFailureException("Error Connecting Database");
 			}
+		}
+		return responseEntity;
+	}
+	
+	@GetMapping("/getAllProducts")
+	public ResponseEntity<List<Product>> getAllProducts() {
+		String METHOD_NAME = "getAllProducts";
+		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
+		ResponseEntity<List<Product>> responseEntity = null;
+		List<Product> products = productRepository.findAll();
+		if(products.size() > 0) {
+			responseEntity = ResponseEntity.ok().body(products);
+		} else {
+			throw new ResourceNotFoundException("No Records Found : ");
 		}
 		return responseEntity;
 	}
