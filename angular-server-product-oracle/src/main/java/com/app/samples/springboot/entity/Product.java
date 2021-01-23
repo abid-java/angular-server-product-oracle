@@ -28,11 +28,11 @@ public class Product {
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private long productId;
 	
 	/** The name. */
 	@Column(name="product_name")
-	private String name;
+	private String productName;
 	
 	/** The description. */
 	@Column(name="description")
@@ -48,7 +48,7 @@ public class Product {
 	
 	/** The product locations. */
 	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pc_fid", referencedColumnName = "id")
+	@JoinColumn(name = "pc_fid", referencedColumnName = "productId")
 	List<ProductLocation> productLocations = new ArrayList<>();
 	
 	/**
@@ -68,10 +68,10 @@ public class Product {
 	 * @param createdAt the created at
 	 * @param productLocations the product locations
 	 */
-	public Product(long id, String name, String description, BigDecimal price, Date createdAt, List<ProductLocation> productLocations) {
+	public Product(long productId, String productName, String description, BigDecimal price, Date createdAt, List<ProductLocation> productLocations) {
 		super();
-		this.id = id;
-		this.name = name;
+		this.productId = productId;
+		this.productName = productName;
 		this.description = description;
 		this.price = price;
 		this.createdAt = createdAt;
@@ -83,8 +83,8 @@ public class Product {
 	 *
 	 * @return the id
 	 */
-	public long getId() {
-		return id;
+	public long getProductId() {
+		return productId;
 	}
 
 	/**
@@ -92,8 +92,8 @@ public class Product {
 	 *
 	 * @param id the new id
 	 */
-	public void setId(long id) {
-		this.id = id;
+	public void setProductId(long productId) {
+		this.productId = productId;
 	}
 
 	/**
@@ -101,8 +101,8 @@ public class Product {
 	 *
 	 * @return the name
 	 */
-	public String getName() {
-		return name;
+	public String getProductName() {
+		return productName;
 	}
 
 	/**
@@ -110,8 +110,8 @@ public class Product {
 	 *
 	 * @param name the new name
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 	/**

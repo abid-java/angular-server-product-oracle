@@ -22,7 +22,7 @@ public class ProductLocation {
 	/** The id. */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long productId;
 	
 	/** The address line 1. */
 	@Column(name = "addressLine_1")
@@ -66,9 +66,9 @@ public class ProductLocation {
 	 * @param country the country
 	 * @param zipCode the zip code
 	 */
-	public ProductLocation(long id, String addressLine1, String addressLine2, String city, String state, String country, long zipCode) {
+	public ProductLocation(long productId, String addressLine1, String addressLine2, String city, String state, String country, long zipCode) {
 		super();
-		this.id = id;
+		this.productId = productId;
 		this.addressLine1 = addressLine1;
 		this.addressLine2 = addressLine2;
 		this.city = city;
@@ -82,8 +82,8 @@ public class ProductLocation {
 	 *
 	 * @return the id
 	 */
-	public long getId() {
-		return id;
+	public long getProductId() {
+		return productId;
 	}
 
 	/**
@@ -91,8 +91,8 @@ public class ProductLocation {
 	 *
 	 * @param id the new id
 	 */
-	public void setId(long id) {
-		this.id = id;
+	public void setProductId(long productId) {
+		this.productId = productId;
 	}
 
 	/**
