@@ -74,6 +74,11 @@ public class ProductController {
 		return responseEntity;
 	}
 	
+	/**
+	 * Gets the all products.
+	 *
+	 * @return the all products
+	 */
 	@GetMapping("/getAllProducts")
 	public ResponseEntity<List<Product>> getAllProducts() {
 		String METHOD_NAME = "getAllProducts";
@@ -84,6 +89,26 @@ public class ProductController {
 			responseEntity = ResponseEntity.ok().body(products);
 		} else {
 			throw new ResourceNotFoundException("No Records Found : ");
+		}
+		return responseEntity;
+	}
+	
+	/**
+	 * Gets the product by id.
+	 *
+	 * @param productId the product id
+	 * @return the product by id
+	 */
+	@GetMapping("/{productId}")
+	public ResponseEntity<Product> getProductById(@PathVariable("productId") long productId) {
+		String METHOD_NAME = "getProductById";
+		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
+		ResponseEntity<Product> responseEntity = null;
+		Product existingProduct = productUtil.existingProduct(productId);
+		if(existingProduct != null) {
+			responseEntity = ResponseEntity.ok().body(existingProduct);
+		} else {
+			throw new ResourceNotFoundException("Product Not Found with Id : " + productId);
 		}
 		return responseEntity;
 	}
