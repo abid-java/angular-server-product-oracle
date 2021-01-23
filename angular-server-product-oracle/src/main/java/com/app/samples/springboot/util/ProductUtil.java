@@ -11,9 +11,14 @@ import com.google.gson.Gson;
 import com.app.samples.springboot.repository.ProductRepository;
 import com.app.samples.springboot.entity.Product;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProductUtil.
+ */
 @Service
 public class ProductUtil {
 
+	/** The product repository. */
 	@Autowired
 	private ProductRepository productRepository; 
 	
@@ -23,6 +28,12 @@ public class ProductUtil {
 	/** The logger. */
 	Logger logger = Logger.getLogger(ProductUtil.class.getName());
 	
+	/**
+	 * Existing product.
+	 *
+	 * @param productId the product id
+	 * @return the product
+	 */
 	public Product existingProduct(Long productId) {
 		String METHOD_NAME = "existingProduct";
 		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
@@ -38,6 +49,12 @@ public class ProductUtil {
 		return existingProduct;
 	}
 	
+	/**
+	 * Convert object to json.
+	 *
+	 * @param javaObject the java object
+	 * @return the string
+	 */
 	public String convertObjectToJson(Object javaObject) {
 		String METHOD_NAME = "convertObjectToJson";
 		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");

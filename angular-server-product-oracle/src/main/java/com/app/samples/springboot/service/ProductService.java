@@ -9,12 +9,23 @@ import com.app.samples.springboot.entity.Product;
 import com.app.samples.springboot.entity.ProductLocation;
 import com.app.samples.springboot.repository.ProductDAO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProductService.
+ */
 @Service
 public class ProductService {
 	
+	/** The product dao. */
 	@Autowired
 	private ProductDAO productDao;
 	
+	/**
+	 * Update product.
+	 *
+	 * @param product the product
+	 * @return the product
+	 */
 	public Product updateProduct(Product product) {
 		List<ProductLocation> productLocations = null;
 		long productId = 0L;

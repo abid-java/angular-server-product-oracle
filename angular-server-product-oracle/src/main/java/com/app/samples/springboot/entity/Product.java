@@ -61,8 +61,8 @@ public class Product {
 	/**
 	 * Post.
 	 *
-	 * @param id the id
-	 * @param name the name
+	 * @param productId the product id
+	 * @param productName the product name
 	 * @param description the description
 	 * @param price the price
 	 * @param createdAt the created at
@@ -90,7 +90,7 @@ public class Product {
 	/**
 	 * Sets the id.
 	 *
-	 * @param id the new id
+	 * @param productId the new product id
 	 */
 	public void setProductId(long productId) {
 		this.productId = productId;
@@ -108,7 +108,7 @@ public class Product {
 	/**
 	 * Sets the name.
 	 *
-	 * @param name the new name
+	 * @param productName the new product name
 	 */
 	public void setProductName(String productName) {
 		this.productName = productName;
@@ -184,6 +184,16 @@ public class Product {
 	 */
 	public void setProductLocations(List<ProductLocation> productLocations) {
 		this.productLocations = productLocations;
+	}
+	
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", description=" + description + ", price="
+				+ price + ", createdAt=" + createdAt + ", productLocations=" + productLocations + "]";
 	}
 	
 }

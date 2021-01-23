@@ -58,7 +58,7 @@ public class ProductLocation {
 	/**
 	 * Instantiates a new product location.
 	 *
-	 * @param id the id
+	 * @param productId the product id
 	 * @param addressLine1 the address line 1
 	 * @param addressLine2 the address line 2
 	 * @param city the city
@@ -89,7 +89,7 @@ public class ProductLocation {
 	/**
 	 * Sets the id.
 	 *
-	 * @param id the new id
+	 * @param productId the new product id
 	 */
 	public void setProductId(long productId) {
 		this.productId = productId;
@@ -202,5 +202,16 @@ public class ProductLocation {
 	public void setZipCode(long zipCode) {
 		this.zipCode = zipCode;
 	}
+	
+	
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
+	public String toString() {
+		return "ProductLocation [productId=" + productId + ", addressLine1=" + addressLine1 + ", addressLine2=" + addressLine2 + ", city="
+				+ city + ", state=" + state + ", country=" + country + ", zipCode=" + zipCode + "]";
+	}	
 	
 }

@@ -16,6 +16,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AngularServerProductApplication.
+ */
 @SpringBootApplication
 @EnableSwagger2
 public class AngularServerProductApplication {
@@ -23,6 +27,11 @@ public class AngularServerProductApplication {
 	/** The logger. */
 	private static Logger logger = Logger.getLogger(AngularServerProductApplication.class.getName());
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		logger.info("<<<<<====================================== Executing Spring Boot Application ======================================>>>>>");
 		SpringApplication.run(AngularServerProductApplication.class, args);

@@ -34,9 +34,17 @@ public class ProductDAO {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	
+	/** The product util. */
 	@Autowired
 	private ProductUtil productUtil; 
 	
+	/**
+	 * Update product.
+	 *
+	 * @param product the product
+	 * @param productId the product id
+	 * @return the product
+	 */
 	public Product updateProduct(Product product, long productId) {
 		String METHOD_NAME = "updateProduct";
 		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
@@ -64,6 +72,13 @@ public class ProductDAO {
 		return product;
 	}
 	
+	/**
+	 * Update product location.
+	 *
+	 * @param productLocation the product location
+	 * @param productId the product id
+	 * @return the product location
+	 */
 	public ProductLocation updateProductLocation(ProductLocation productLocation, long productId) {
 		String METHOD_NAME = "updateProductLocation";
 		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
