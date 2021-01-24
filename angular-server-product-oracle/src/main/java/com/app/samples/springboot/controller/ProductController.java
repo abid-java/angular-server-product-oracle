@@ -23,6 +23,7 @@ import com.app.samples.springboot.entity.Product;
 import com.app.samples.springboot.exception.ResourceNotFoundException;
 
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ProductController.
@@ -82,14 +83,16 @@ public class ProductController {
 	@GetMapping("/getAllProducts")
 	public ResponseEntity<List<Product>> getAllProducts() {
 		String METHOD_NAME = "getAllProducts";
+		List<Product> products = null;
 		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
 		ResponseEntity<List<Product>> responseEntity = null;
-		List<Product> products = productRepository.findAll();
-		if(products.size() > 0) {
-			responseEntity = ResponseEntity.ok().body(products);
-		} else {
-			throw new ResourceNotFoundException("No Records Found : ");
-		}
+		products = productRepository.findAll();
+			if(products.size() > 0) {
+				products = productUtil.updatedProductLocationProductId(products);
+				responseEntity = ResponseEntity.ok().body(products);
+			} else {
+				throw new ResourceNotFoundException("No Records Found : ");
+			}
 		return responseEntity;
 	}
 	

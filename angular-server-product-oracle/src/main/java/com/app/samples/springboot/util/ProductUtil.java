@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 
 import com.app.samples.springboot.repository.ProductRepository;
 import com.app.samples.springboot.entity.Product;
+import com.app.samples.springboot.entity.ProductLocation;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -63,5 +64,20 @@ public class ProductUtil {
 			jsonObject = new Gson().toJson(javaObject);
 		}
 		return jsonObject;
+	}
+	
+	public List<Product> updatedProductLocationProductId(List<Product> products) {
+		long productId = 0L;
+		List<ProductLocation> productLocations = null;
+		for(Product product : products) {
+			if(product != null) {
+				productId = product.getProductId();
+				productLocations = product.getProductLocations();
+				for(ProductLocation productLocation : productLocations) {
+					productLocation.setProductId(productId);
+				}
+			}
+		}
+		return products;
 	}
 }
