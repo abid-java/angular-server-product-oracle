@@ -1,7 +1,9 @@
 package com.app.samples.springboot.controller;
 
 import java.util.logging.Logger;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessResourceFailureException;
@@ -44,6 +46,7 @@ public class ProductController {
 	@Autowired
 	private ProductRepository productRepository;
 	
+	/** The product service. */
 	@Autowired
 	private ProductService productService;
 	
@@ -119,6 +122,13 @@ public class ProductController {
 		return responseEntity;
 	}
 	
+	/**
+	 * Update product.
+	 *
+	 * @param product the product
+	 * @param productId the product id
+	 * @return the response entity
+	 */
 	@PutMapping("/{productId}")
 	public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable("productId") long productId) {
 		ResponseEntity<Product> responseEntity = null;
@@ -132,6 +142,31 @@ public class ProductController {
 			throw new ResourceNotFoundException("Product Not Found with Id : " + productId);
 		}
 		return responseEntity;		
+	}
+	
+	/**
+	 * Delete product.
+	 *
+	 * @param productId the product id
+	 * @return the response entity
+	 * @throws ResourceNotFoundException the resource not found exception
+	 */
+	@DeleteMapping("/{productId}")
+	public ResponseEntity<Map<String, Boolean>> deleteProduct(@PathVariable("productId") Long productId) throws ResourceNotFoundException {
+		String METHOD_NAME = "deleteProduct";
+		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
+		Map<String, Boolean> response = null;
+		ResponseEntity<Map<String, Boolean>> responseEntity = null;
+		Product productToDelete = productUtil.existingProduct(productId);
+		if(productToDelete != null) {
+			response = new HashMap<>();
+			productRepository.delete(productToDelete);
+			response.put("Deleted", Boolean.TRUE);
+			responseEntity = ResponseEntity.ok().body(response);
+		} else {
+			throw new ResourceNotFoundException("Product Not Found with Id : " + productId);
+		}
+		return responseEntity;
 	}
 
 }
