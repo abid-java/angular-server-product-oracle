@@ -26,17 +26,17 @@ public class ProductService {
 	 * @param product the product
 	 * @return the product
 	 */
-	public Product updateProduct(Product product) {
+	public Product updateProductDetails(Product product, long productId) {
 		List<ProductLocation> productLocations = null;
-		long productId = 0L;
+		long productLocationProductId = 0L;
 		if(product != null) {
-			productId = product.getProductId();
-			//store product details first
+			//update product details first
 			productDao.updateProduct(product, productId);
-			//iterate through product locations and store each product location to a given productId
+			//iterate through product locations and update each product location to a given productId
 			productLocations = product.getProductLocations();
 			for(ProductLocation productLocation : productLocations) {
-				productDao.updateProductLocation(productLocation, productId);
+				productLocationProductId = productLocation.getProductId();
+				productDao.updateProductLocation(productLocation, productId,productLocationProductId);
 			}
 		}
 		return product;

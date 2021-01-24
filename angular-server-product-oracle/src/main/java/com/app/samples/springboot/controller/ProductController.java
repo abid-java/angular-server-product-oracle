@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.samples.springboot.repository.ProductRepository;
+import com.app.samples.springboot.service.ProductService;
 import com.app.samples.springboot.repository.ProductDAO;
 import com.app.samples.springboot.util.ProductUtil;
 import com.app.samples.springboot.entity.Product;
@@ -42,6 +43,9 @@ public class ProductController {
 	/** The product repository. */
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private ProductService productService;
 	
 	/** The product util. */
 	@Autowired
@@ -88,7 +92,6 @@ public class ProductController {
 		ResponseEntity<List<Product>> responseEntity = null;
 		products = productRepository.findAll();
 			if(products.size() > 0) {
-				products = productUtil.updatedProductLocationProductId(products);
 				responseEntity = ResponseEntity.ok().body(products);
 			} else {
 				throw new ResourceNotFoundException("No Records Found : ");
@@ -114,6 +117,21 @@ public class ProductController {
 			throw new ResourceNotFoundException("Product Not Found with Id : " + productId);
 		}
 		return responseEntity;
+	}
+	
+	@PutMapping("/{productId}")
+	public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable("productId") long productId) {
+		ResponseEntity<Product> responseEntity = null;
+		Product updatedProduct = null;
+		String METHOD_NAME = "updateProduct";
+		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
+		updatedProduct = productService.updateProductDetails(product, productId);
+		if(updatedProduct != null) {
+			responseEntity = ResponseEntity.ok().body(updatedProduct);
+		} else {
+			throw new ResourceNotFoundException("Product Not Found with Id : " + productId);
+		}
+		return responseEntity;		
 	}
 
 }

@@ -66,18 +66,4 @@ public class ProductUtil {
 		return jsonObject;
 	}
 	
-	public List<Product> updatedProductLocationProductId(List<Product> products) {
-		long productId = 0L;
-		List<ProductLocation> productLocations = null;
-		for(Product product : products) {
-			if(product != null) {
-				productId = product.getProductId();
-				productLocations = product.getProductLocations();
-				for(ProductLocation productLocation : productLocations) {
-					productLocation.setProductId(productId);
-				}
-			}
-		}
-		return products;
-	}
 }

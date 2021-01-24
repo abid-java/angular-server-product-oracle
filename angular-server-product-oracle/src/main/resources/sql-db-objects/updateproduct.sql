@@ -12,10 +12,10 @@ CREATE OR REPLACE FUNCTION public.updateproduct(
 AS $BODY$
 begin
 
-update product set
+update products set
 	product_name = v_product ->> 'productName',
 	description = v_product ->> 'description',
-	price = v_product ->> 'price',
+	price = (v_product ->> 'price')::numeric,
 	created_at = (v_product ->>'createdAt')::timestamp without time zone
 WHERE product_id = v_product_id;
 

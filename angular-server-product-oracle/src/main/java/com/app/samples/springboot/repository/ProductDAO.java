@@ -79,7 +79,7 @@ public class ProductDAO {
 	 * @param productId the product id
 	 * @return the product location
 	 */
-	public ProductLocation updateProductLocation(ProductLocation productLocation, long productId) {
+	public ProductLocation updateProductLocation(ProductLocation productLocation, long productId, long productLocationProductId) {
 		String METHOD_NAME = "updateProductLocation";
 		logger.info("<<===== executing " + METHOD_NAME + " in " + CLASS_NAME +" =====>>");
 		Map<String, Object> inParamMap = null;
@@ -96,6 +96,8 @@ public class ProductDAO {
 				inParamMap.put("v_product_location", jsonProductLocation);//productlocation json object
 				logger.info("v_product_id : " + productId);
 				inParamMap.put("v_product_id", productId); //product id
+				logger.info("v_productlocation_product_id : " + productLocationProductId);
+				inParamMap.put("v_productlocation_product_id", productLocationProductId);
 			}
 			sqlParameterSource = new MapSqlParameterSource(inParamMap);
 			simpleJdbcCallResult = simpleJdbcCall.execute(sqlParameterSource);
