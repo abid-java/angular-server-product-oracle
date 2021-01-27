@@ -76,7 +76,7 @@ public class ProductController {
 			if(savedproduct != null) {
 				responseEntity = ResponseEntity.ok().body(product);
 			} else {
-				throw new DataAccessResourceFailureException("Error Connecting Database");
+				throw new Exception("Error Connecting Database");
 			}
 		}
 		return responseEntity;
